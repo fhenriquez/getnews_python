@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*
 
 """
-    Created by fhenriquez on 2/27/19
+    Created by fhenriquez on 3/18/19
     TODO: fill modude doc
 """
 
@@ -139,13 +139,16 @@ def print_source_list(languages='all'):
     print tabulate(rows, headers)
 
 def main():
-    # desc = args.desc
-    # if desc:
-    #    logger.info('Getting description for {}....'.format(desc))
-    #    for source in sources:
-    #        if source.get('id') == desc:
-    #            pprint_dict(source, indent_size=1)
-    #            exit(0)
+    if args.desc:
+        print_desc(args.desc)
+        exit(0)
+
+    if args.all:
+        print_source_list()
+        exit(0)
+
+    if args.list:
+        print_source_list(args.list)
     pass
 
 
@@ -185,35 +188,6 @@ if __name__ == '__main__':
     sources = api.get_sources()
     if sources.get('status') == 'ok':
         sources = sources.get('sources')
-
-
-    # logger.info('Gathering all Tenants for {}.'.format(controller))
-    # # Should figure out how to return all tenants.
-    # # To not be limited by page size.
-    # tenant_results = session.get('tenant?page_size=150')
-    # logger.info('Gathering all SSL Certs for {}.'.format(controller))
-    # # Should figure out how to return all certs.
-    # # To not be limited by page size.
-    # sslcert_results = session.get('sslkeyandcertificate?page_size=500')
-    #
-    # list_tenant = tenant_results.json()['results']
-    # list_sslcert = sslcert_results.json()['results']
-    #
-    #
-    # logger.debug('Retriving Certificate Info for {}'.format(sslcert))
-    # cert_info = get_sslcert(sslcert)[0]
-    # # SystemDefaultCertUUID = SystemDefaultCert[0]['uuid']
-
-    if args.desc:
-        print_desc(args.desc)
-        exit(0)
-
-    if args.all:
-        print_source_list()
-        exit(0)
-
-    if args.list:
-        print_source_list(args.list)
 
     try:
         main()
